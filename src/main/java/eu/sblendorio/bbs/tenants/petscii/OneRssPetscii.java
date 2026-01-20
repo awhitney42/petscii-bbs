@@ -36,7 +36,7 @@ public class OneRssPetscii extends PetsciiThread {
     String HR_TOP = StringUtils.repeat(chr(163), getScreenColumns() - 1);
 
     protected int screenRows = 19;
-    protected int pageSize = 10;
+    protected int pageSize = 8;
     protected String bottomUrl = null;
     protected String bottomLabel = null;
     protected String bottomPrompt = null;

@@ -187,7 +187,8 @@ public class AdamBbs extends PetsciiThread {
             newline();
             write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '1', REVOFF, 161); println("CNN News");
             write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '2', REVOFF, 161); println("BBC News");
-            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, 'd', REVOFF, 161); println("NPR News");
+            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '3', REVOFF, 161); println("NPR News");
+            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '4', REVOFF, 161); println("Techdirt");
             newline();
             write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '.', REVOFF, 161);
             print("Exit ");
@@ -207,7 +208,8 @@ public class AdamBbs extends PetsciiThread {
                 switch (key) {
                     case '1' -> launch(new LiteCnnPetscii()); //launch(new CnnPetscii());
                     case '2' -> launch(new BbcPetscii());
-                    case 'd' -> launch(new LiteNprPetscii());
+                    case '3' -> launch(new LiteNprPetscii());
+                    case '4' -> launch(new OneRssTechdirtPetscii());
                     case '.' -> { return; }
                     default -> validKey = false;
                 }
