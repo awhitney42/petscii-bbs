@@ -1,0 +1,322 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en" class="notranslate" translate="no">    <!-- All translators -->
+<head>
+    <meta name="google" content="notranslate">
+    <link rel='icon' href='logo-round.png'>
+    <!--meta name="viewport" 
+        content="user-scalable=0"-->
+    <style>
+
+        .vickey {
+            padding: 0px;
+            width: 8.4%; 
+            height: 5vh;
+            margin: 1px;
+            margin-bottom: 3px;
+            font-size: 4vh;
+            font-weight: bold; 
+            font-family: monospace;
+            color: white; 
+            background: #666; 
+            border: 0px solid;	
+            border-radius: 4px;
+        }	
+        .vickey:focus {
+            background: #aaa;
+        }
+
+        .halfspace {
+            width: 00px; 
+            height: 120px;
+            margin: 1px;
+            background: none; 
+            border: 0px solid;
+            padding: 0px;
+        }
+
+        #keyboard {
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        @media (pointer:none), (pointer:coarse) {
+            * {
+                touch-action: manipulation;
+            }
+
+
+            .bg {
+                min-height: 90vh;
+                padding-bottom: 38vh;
+                margin: 0px !important;
+            }        
+        }
+
+
+        @media (orientation: portrait) and (pointer:coarse), (orientation: portrait) and (pointer:none) {
+        .bg {min-width:1024px;}
+        }
+
+        @media (orientation: landscape) and (pointer:coarse), (orientation: landscape) and (pointer:none) {
+        }
+
+
+        @media (pointer:fine) {
+            #keyboard {
+                display:none;
+            }
+
+        }
+
+
+
+        .bg {
+            background-color: #000;
+            position:relative;
+        }
+        .vtxClient {
+            text-align: center;
+            margin: 0 auto;
+            display: inline-block;
+            padding: 32px;
+        }
+
+
+    </style>	
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset='utf-8'>
+    <link rel="preload" href="index.css" as="style">
+    <link rel="stylesheet" href="index.css">
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/pako/1.0.3/pako.min.js'></script>
+    <script type='text/javascript'>
+
+        var vtxdata = {
+            sysName:        "BBS online",
+            wsConnect:      "wss://localhost:2401",
+            term:           "PETSCII",
+            codePage:       "C64",
+            autoConnect:    1,
+            telnet:         0, //1,
+            wsProtocol:     'binary',
+            wsDataType:     'arraybuffer',
+            fontSize:       '24px',
+            fontName:     'UVGA16',
+            //fontName:       'DECTERM',
+            crtCols:        40,
+            crtRows:        25,
+            crtHistory:     25,
+            xScale:         2,
+            //initStr:     "\x1B[?50h\x1B[0;10m\x1B[255l\x1B[?25h\x1B[?31h\x1B[?32l\x1B[?33l\x1B[?34l\x1B[?35l",
+            initStr:        "",
+            defPageBorder:  0,
+            defPageBG:      0x10,
+            defCrsrFG:      0x07,
+            defCrsrAttr:    [ 'full', 'horizontal' ],
+            defCellFG:      0x07,
+            defCellBG:      0x00,
+            defCellAttr:    []
+        };
+
+    </script>
+    <script type='text/javascript' src='vtxclient.js'></script>
+    <script>
+        var lock = false;
+
+        function byId(elem) {
+            return document.getElementById(elem);
+        }
+
+        function byClass(name) {
+            return [...document.getElementsByClassName(name)]
+        }
+
+        var t_active = null
+        function sendkey(element) {
+            var ch;
+            if (typeof element === 'string') {
+                ch = element
+            } else {
+                ch = element.innerText.charAt(0)
+            }
+            var localevt = {}
+
+            localevt.returnValue=true
+            localevt.ctrlKey=false
+            localevt.altKey=false
+            localevt.preventDefault=()=>{}
+            localevt.shiftKey = false
+            localevt.key = ch;
+            switch (ch) {
+                case "enter":
+                        localevt.keyCode = 13
+                        break;
+                case "backspace":
+                        localevt.keyCode = 8
+                        break;
+                case "+":
+                        localevt.keyCode = 187
+                        break;
+                case "-":
+                        localevt.keyCode = 189
+                        break;
+                case "*":
+                        localevt.keyCode = 221
+                        break;
+                case "*":
+                        localevt.keyCode = 221
+                        break;
+                case "/":
+                        localevt.keyCode = 55
+                        break;
+                case "<":
+                case ",":
+                        localevt.keyCode = 188
+                        break;
+                case ">":
+                case ".":
+                        localevt.keyCode = 190
+                        break;
+                case "!":
+                        localevt.keyCode = 49
+                        break;
+                case "\"":
+                        localevt.keyCode = 50
+                        break;
+                case "#":
+                        localevt.keyCode = 222
+                        break;
+                case "$":
+                        localevt.keyCode = 52
+                        break;
+                case "%":
+                        localevt.keyCode = 53
+                        break;
+                case "&":
+                        localevt.keyCode = 54
+                        break;
+                case "(":
+                        localevt.keyCode = 56
+                        break;
+                case ")":
+                        localevt.keyCode = 57
+                        break;
+                case " ":
+                        localevt.keyCode = 32
+                        break;
+                case ":":
+                case ";":
+                case "@":
+                        localevt.keyCode = 186
+                        break;
+                default:
+                        localevt.keyCode=element.innerText.toUpperCase().charCodeAt(0)
+                        localevt.shiftKey=!!ch.match(/[a-z]/i) && (ch == ch.toUpperCase())
+            }
+
+            keyDown(localevt)
+            clearTimeout(t_active)
+            t_active = setTimeout(
+                () => { document.getElementById("dummy").focus() },
+                500);
+        }
+
+        function shiftlock() {
+            lock = !lock;
+            byClass("key_alpha")
+                .map(x=>x.innerText = (lock ? x.innerText.toUpperCase() : x.innerText.toLowerCase()));
+            
+            if (lock) {
+                byId("comma").innerText = ";"
+                byId("period").innerText = ":"
+                byId("k1").innerText = "!"
+                byId("k2").innerText = "\""
+                byId("k3").innerText = "#"
+                byId("k4").innerText = "$"
+                byId("k5").innerText = "%"
+                byId("k6").innerText = "&"
+                byId("k7").innerText = "/"
+                byId("k8").innerText = "("
+                byId("k9").innerText = ")"
+                byId("k0").innerText = "="
+            } else {
+                byId("comma").innerText = ","
+                byId("period").innerText = "."
+                byClass("key_digit").map(x=>x.innerText=x.id.charAt(1))
+            }
+            setTimeout(
+                () => { document.getElementById("dummy").focus() },
+                1000);
+        }
+    </script>
+</head>
+<body class="bg">
+    <div style="text-align:center"> 
+        <div id='vtxclient' style='position:relative;text-align:center;margin:0 auto;display:inline-block;padding:32px;'>
+            <!-- VTX client will appears in here -->
+        </div>
+    </div>
+    <div align="center" id="keyboard">
+        <button id="dummy" style="width:0;height:0;padding:0;border:0">&nbsp;&nbsp;&nbsp;&nbsp;</button>
+        <button class="vickey key_digit" id="k1" onclick="sendkey(this)">1</button>
+        <button class="vickey key_digit" id="k2" onclick="sendkey(this)">2</button>
+        <button class="vickey key_digit" id="k3" onclick="sendkey(this)">3</button>
+        <button class="vickey key_digit" id="k4" onclick="sendkey(this)">4</button>
+        <button class="vickey key_digit" id="k5" onclick="sendkey(this)">5</button>
+        <button class="vickey key_digit" id="k6" onclick="sendkey(this)">6</button>
+        <button class="vickey key_digit" id="k7" onclick="sendkey(this)">7</button>
+        <button class="vickey key_digit" id="k8" onclick="sendkey(this)">8</button>
+        <button class="vickey key_digit" id="k9" onclick="sendkey(this)">9</button>
+        <button class="vickey key_digit" id="k0" onclick="sendkey(this)">0</button><br>
+
+        <button class="vickey key_alpha" onclick="sendkey(this)">q</button>
+        <button class="vickey key_alpha" onclick="sendkey(this)">w</button>
+        <button class="vickey key_alpha" onclick="sendkey(this)">e</button>
+        <button class="vickey key_alpha" onclick="sendkey(this)">r</button>
+        <button class="vickey key_alpha" onclick="sendkey(this)">t</button>
+        <button class="vickey key_alpha" onclick="sendkey(this)">y</button>
+        <button class="vickey key_alpha" onclick="sendkey(this)">u</button>
+        <button class="vickey key_alpha" onclick="sendkey(this)">i</button>
+        <button class="vickey key_alpha" onclick="sendkey(this)">o</button>
+        <button class="vickey key_alpha" onclick="sendkey(this)">p</button><br>
+        <span class="halfspace" id="halfspace1"></span>
+        <button class="vickey key_alpha" onclick="sendkey(this)">a</button>
+        <button class="vickey key_alpha" onclick="sendkey(this)">s</button>
+        <button class="vickey key_alpha" onclick="sendkey(this)">d</button>
+        <button class="vickey key_alpha" onclick="sendkey(this)">f</button>
+        <button class="vickey key_alpha" onclick="sendkey(this)">g</button>
+        <button class="vickey key_alpha" onclick="sendkey(this)">h</button>
+        <button class="vickey key_alpha" onclick="sendkey(this)">j</button>
+        <button class="vickey key_alpha" onclick="sendkey(this)">k</button>
+        <button class="vickey key_alpha" onclick="sendkey(this)">l</button><br>
+
+        <button class="vickey" onclick="shiftlock()">^</button>
+        <button class="vickey key_alpha" onclick="sendkey(this)">z</button>
+        <button class="vickey key_alpha" onclick="sendkey(this)">x</button>
+        <button class="vickey key_alpha" onclick="sendkey(this)">c</button>
+        <button class="vickey key_alpha" onclick="sendkey(this)">v</button>
+        <button class="vickey key_alpha" onclick="sendkey(this)">b</button>
+        <button class="vickey key_alpha" onclick="sendkey(this)">n</button>
+        <button class="vickey key_alpha" onclick="sendkey(this)">m</button>	
+        <button class="vickey" onclick="sendkey('backspace')">⇐</button>
+        <button class="vickey" onclick="sendkey('enter')">⏎</button><br>
+
+        <button class="vickey" id="comma"  onclick="sendkey(this)">,</button>
+        <button class="vickey" id="period" onclick="sendkey(this)">.</button>
+        <button class="vickey" onclick="sendkey(this)">@</button>
+        <button class="vickey" onclick="sendkey(this)">+</button>
+        <button class="vickey" onclick="sendkey(this)">-</button>
+        <button class="vickey" onclick="sendkey(this)">*</button>
+        <button class="vickey" onclick="sendkey(this)">/</button>
+        <button class="vickey" onclick="sendkey(this)">&lt;</button>
+        <button class="vickey" onclick="sendkey(this)">&gt;</button>
+        <button class="vickey" onclick="sendkey(' ')">&nbsp;</button><br>
+    </div>
+</body>
+</html>
+
