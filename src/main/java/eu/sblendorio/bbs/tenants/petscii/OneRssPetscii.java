@@ -469,9 +469,9 @@ public class OneRssPetscii extends PetsciiThread {
         return result;
     }
 
-    public byte[] LOGO_MENU = readBinaryFile("petscii/baya-bbs.seq");
+    public byte[] LOGO_MENU = readBinaryFile("petscii/news.seq");
 
-    public byte[] LOGO_SECTION = readBinaryFile("petscii/baya.seq");
+    public byte[] LOGO_SECTION = readBinaryFile("petscii/news.seq");
 
     protected void waitOn() {
         print("WAIT PLEASE...");

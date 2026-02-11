@@ -65,7 +65,7 @@ public class AdamBbs extends PetsciiThread {
                     key + ")");
                 switch (key) {
                     case '1' -> menuNewsEng();
-                    case '2' -> menuNewsIta();
+                    case '2' -> menuNewsTech();
                     case '3' -> menuGames();
                     case '4' -> menuDownloads();
                     case '5' -> launch(new Chat64());
@@ -83,90 +83,6 @@ public class AdamBbs extends PetsciiThread {
                 }
             } while (!validKey);
         }
-    }
-
-    public void menuNewsIta() throws Exception {
-        do {
-            write(CLR, LOWERCASE, CASE_LOCK, HOME);
-            drawLogo();
-            write(GREY3);
-            gotoXY(4,4);
-            write(REVON, GREEN, 161, WHITE, ' ', RED, REVOFF, 161, CYAN); print("Italian News   "); write(GREY3, REVON, 161, 'j', REVOFF, 161); println("Bufale.net");
-            write(RIGHT, RIGHT, RIGHT, ' ', ' ', ' ', ' ', LIGHT_BLUE); print(repeat((char) 163, 12)); print("   "); write(GREY3, REVON, 161, 'k', REVOFF, 161); println("Butac");
-            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '1', REVOFF, 161); print("Televideo      "); write(REVON, 161, 'l', REVOFF, 161); println("Facta news");
-            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '2', REVOFF, 161); print("Open Online    "); write(REVON, 161, 'm', REVOFF, 161); println("Fanpage");
-            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '3', REVOFF, 161); print("Valigia Blu    "); write(REVON, 161, 'n', REVOFF, 161); println("Sportal.it");
-            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '4', REVOFF, 161); print("Linkiesta      "); write(REVON, 161, 'o', REVOFF, 161); println("Indie Campus");
-            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '5', REVOFF, 161); print("Il Fatto quot. "); write(REVON, 161, 'p', REVOFF, 161); println("Retrocommodore");
-            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '6', REVOFF, 161); print("TI Watch Museum"); write(REVON, 161, 'q', REVOFF, 161); println("Valoroso.IT");
-            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '7', REVOFF, 161); print("Lercio         "); write(REVON, 161, 'r', REVOFF, 161); println("Mupin");
-            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '8', REVOFF, 161); print("Bitold.eu      "); write(REVON, 161, 's', REVOFF, 161); println("Query Online");
-            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '9', REVOFF, 161); print("Medbunker      "); write(REVON, 161, 't', REVOFF, 161); println("Formiche.net");
-            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '0', REVOFF, 161); print("FNOMCeO        "); write(REVON, 161, 'u', REVOFF, 161); println("Infosec News");
-            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, 'a', REVOFF, 161); print("Medical Facts  "); write(REVON, 161, 'v', REVOFF, 161); println("Giano News");
-            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, 'b', REVOFF, 161); print("Retrocampus    "); write(REVON, 161, 'w', REVOFF, 161); println("Red Hot Cyber");
-            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, 'c', REVOFF, 161); print("DigiTANTO - AdP"); write(REVON, 161, 'x', REVOFF, 161); println("MCC Blog");
-            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, 'd', REVOFF, 161); print("C.H.P.D.B.     "); write(REVON, 161, 'y', REVOFF, 161); println("Ready 64");
-            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, 'e', REVOFF, 161); println("Attivissimo");
-            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, 'f', REVOFF, 161); println("Commesso Perplesso");
-            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, 'g', REVOFF, 161); println("Apulia Retrocomputing");
-            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, 'h', REVOFF, 161); println("Arch. Informatica");
-            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, 'i', REVOFF, 161); print("Alessandro Albano        "); write(REVON, 161, '.', REVOFF, 161); print("Exit");
-            flush();
-            boolean validKey;
-            do {
-                validKey = true;
-                resetInput();
-                int key = readKey();
-                resetInput();
-                if (key >= 193 && key <= 218) {
-                    key -= 96;
-                }
-                key = Character.toLowerCase(key);
-                log("Menu-NewsITA. Pressed: '" + (key < 32 || key > 127 ? "chr(" + key + ")" : ((char) key)) + "' (code=" +
-                    key + ")");
-                switch (key) {
-                    case '1' -> launch(new TelevideoRaiPetscii());
-                    case '2' -> launch(new OneRssOpenOnline());
-                    case '3' -> launch(new ValigiaBlu());
-                    case '4' -> launch(new Linkiesta());
-                    case '5' -> launch(new OneRssIlFattoQuotidianoPetscii());
-                    case '6' -> launch(new OneTexasInstrumentsItaliaPetscii());
-                    case '7' -> launch(new Lercio());
-                    case '8' -> launch(new BitoldPetscii());
-                    case '9' -> launch(new Medbunker());
-                    case '0' -> launch(new DottoreMaEVeroChe());
-                    case 'a' -> launch(new MedicalFacts());
-                    case 'b' -> launch(new RetroCampus());
-                    case 'c' -> launch(new OneRssDigitantoPetscii());
-                    case 'd' -> launch(new ChpdbPetscii());
-                    case 'e' -> launch(new AttivissimoMePetscii());
-                    case 'f' -> launch(new CommessoPerplessoPetscii());
-                    case 'g' -> launch(new OneApuliaRetrocomputingPetscii());
-                    case 'h' -> launch(new ArcheologiaInformatica());
-                    case 'i' -> launch(new AlessandroAlbano());
-                    case 'j' -> launch(new BufaleNet());
-                    case 'k' -> launch(new Butac());
-                    case 'l' -> launch(new FactaNews());
-                    case 'm' -> launch(new LiteFanpagePetscii());
-                    case 'n' -> launch(new Sportal());
-                    case 'o' -> launch(new IndieCampus());
-                    case 'p' -> launch(new Retrocommodore());
-                    case 'q' -> launch(new ValorosoIt());
-                    case 'r' -> launch(new Mupin());
-                    case 's' -> launch(new QueryOnline());
-                    case 't' -> launch(new FormichePetscii());
-                    case 'u' -> launch(new InfosecNewsPetscii());
-                    case 'v' -> launch(new GianoNewsPetscii());
-                    case 'w' -> launch(new RedHotCyberPetscii());
-                    case 'x' -> launch(new MccPetscii());
-                    case 'y' -> launch(new OneRssReady64Petscii());
-                    case '.' -> { return; }
-                    default -> validKey = false;
-                }
-                // if (validKey) return;
-            } while (!validKey);
-        } while (true);
     }
 
     public void menuNewsEng() throws Exception {
@@ -188,7 +104,7 @@ public class AdamBbs extends PetsciiThread {
             write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '1', REVOFF, 161); println("CNN News");
             write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '2', REVOFF, 161); println("BBC News");
             write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '3', REVOFF, 161); println("NPR News");
-            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '4', REVOFF, 161); println("Techdirt");
+            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '4', REVOFF, 161); println("MPR News");
             newline();
             write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '.', REVOFF, 161);
             print("Exit ");
@@ -209,7 +125,56 @@ public class AdamBbs extends PetsciiThread {
                     case '1' -> launch(new LiteCnnPetscii()); //launch(new CnnPetscii());
                     case '2' -> launch(new BbcPetscii());
                     case '3' -> launch(new LiteNprPetscii());
-                    case '4' -> launch(new OneRssTechdirtPetscii());
+		    case '4' -> launch(new OneRssMprPetscii());
+                    case '.' -> { return; }
+                    default -> validKey = false;
+                }
+                // if (validKey) return;
+            } while (!validKey);
+        } while (true);
+    }
+
+    public void menuNewsTech() throws Exception {
+        do {
+            write(CLR, LOWERCASE, CASE_LOCK, HOME);
+            drawLogo();
+            write(GREY3);
+            gotoXY(4, 5);
+            write(32, 32, 32, GREEN);
+            print("Tech");
+            write(WHITE);
+            print(" News");
+            newline();
+            write(RIGHT, RIGHT, RIGHT, ' ', ' ', ' ', ' ', GREY3);
+            println(repeat((char) 163, 18));
+            newline();
+            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '1', REVOFF, 161); println("Techdirt");
+            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '2', REVOFF, 161); println("Hacker News");
+            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '3', REVOFF, 161); println("EFF");
+            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '4', REVOFF, 161); println("MilkCrunch");
+            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '5', REVOFF, 161); println("Imapenguin");
+            newline();
+            write(RIGHT, RIGHT, RIGHT, ' ', GREY3, REVON, 161, '.', REVOFF, 161);
+            print("Exit ");
+            flush();
+            boolean validKey;
+            do {
+                validKey = true;
+                resetInput();
+                int key = readKey();
+                resetInput();
+                if (key >= 193 && key <= 218) {
+                    key -= 96;
+                }
+                key = Character.toLowerCase(key);
+                log("Menu-News.TECH Pressed: '" + (key < 32 || key > 127 ? "chr(" + key + ")" : ((char) key)) + "' (code=" +
+                        key + ")");
+                switch (key) {
+                    case '1' -> launch(new OneRssTechdirtPetscii());
+                    case '2' -> launch(new OneRssHnPetscii());
+                    case '3' -> launch(new OneRssEffPetscii());
+                    case '4' -> launch(new OneRssMilkcrunchPetscii());
+                    case '5' -> launch(new OneRssImapenguinPetscii());
                     case '.' -> { return; }
                     default -> validKey = false;
                 }
@@ -442,6 +407,7 @@ public class AdamBbs extends PetsciiThread {
         if (startsWith(filename,"/")) filename = filename.substring(1);
         for (int i=0; i<25; ++i) newline();
 
+        log(filename);
         write(UPPERCASE);
         if (isXmasTime()) {
             writeRawFile("petscii/santa-kody.seq");
